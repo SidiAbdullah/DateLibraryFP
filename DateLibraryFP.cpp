@@ -45,6 +45,13 @@ int numberOfMinutesInMonth(short month, short year) {
 int numberOfSecondsInMonth(short month, short year) {
     return numberOfMinutesInMonth(month, year) * 60;
 }
+string getMonthName(int m) {
+    string arrMonths[12] = {
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    };
+    return arrMonths[m - 1];
+}
 
 // day
 short getDay() {
@@ -53,10 +60,7 @@ short getDay() {
     cin >> day;
     return day;
 }
-string getDayOfWeek() {
-    int d = getDay();
-    int m = getMonth();
-    int y = getYear();
+string getDayOfWeek(int d, int m, int y) {
     if (m < 3) {
         m += 12;
         y -= 1;
@@ -69,17 +73,16 @@ string getDayOfWeek() {
     string days[] = { "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
     return days[h];
 }
-short getDayOrder() {
-    string d = getDayOfWeek();
-    if (d == "Sunday") return 1;
-    else if (d == "Monday") return 2;
-    else if (d == "Tuesday") return 3;
-    else if (d == "Wednesday") return 4;
-    else if (d == "Thursday") return 5;
-    else if (d == "Friday") return 6;
+short getDayOrder(int d, int m, int y) {
+    string dayName = getDayOfWeek(d, m, y);
+    if (dayName == "Sunday") return 1;
+    else if (dayName == "Monday") return 2;
+    else if (dayName == "Tuesday") return 3;
+    else if (dayName == "Wednesday") return 4;
+    else if (dayName == "Thursday") return 5;
+    else if (dayName == "Friday") return 6;
     else return 7;
 }
-//string getDayName() {}
 
 // date
 string getDate(string sep = "/") {
@@ -89,45 +92,35 @@ string getDate(string sep = "/") {
     return to_string(day) + sep + to_string(month) + sep + to_string(year);
 }
 
+// calender
+void printMonthCalander(int m, int y) {
+    int daysInMonth = numberOfDaysInMonth(m, y);
+    int firstDayOrder = getDayOrder(1, m, y); // to help with formating
 
-//int main()
-//{
-//    //short year = getYear();
-//    //cout << numberOfDaysInYear(year) << endl;
-//    //short month = getMonth();
-//    //cout << numberOfDaysInMonth(month, year) << endl;
-//    //short day = getDay();
-//    //cout << getDayOfWeek() << endl;
-//    //cout << getDayOrder() << endl;
-//}
+    cout << "\n______________________" << getMonthName(m) << "________________________\n" << endl;
+    cout << "  Sun  Mon  Tue  Wed  Thu  Fri  Sat" << endl;
 
-
-
-
-
-
-
-
-int binomial(int n, int k) {
-    int result = 1;
-    for (int i = 0; i < k; i++) {
-        result *= (n - i);
-        result /= i + 1;
+    for (int i = 1; i < firstDayOrder; ++i) {
+        cout << "     ";
     }
-    return result;
-}
-int getNumber() {
-    int n = 0;
-    cout << "Enter a number: ";
-    cin >> n;
-    return n;
+
+    for (int day = 1; day <= daysInMonth; ++day) {
+        printf("%5d", day);
+
+        if ((day + firstDayOrder - 1) % 7 == 0)
+            cout << endl;
+    }
+    cout << "\n\n_____________________________________________________\n\n" << endl;
 }
 
-int main() {
-    int n = getNumber();
 
-    for (int i = 0; i <= n; i++) {
-        cout << binomial(n, i) << " ";
-    }
-    cout << endl;
+
+
+// test
+int main()
+{
+    //int d = getDay();
+    int m = getMonth();
+    int y = getYear();
+    printMonthCalander(m, y);
 }
