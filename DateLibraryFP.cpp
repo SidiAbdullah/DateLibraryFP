@@ -53,7 +53,7 @@ string getMonthName(int m) {
     return arrMonths[m - 1];
 }
 
-// day
+// day (s)
 short getDay() {
     short day;
     cout << "Enter a day: ";
@@ -82,6 +82,14 @@ short getDayOrder(int d, int m, int y) {
     else if (dayName == "Thursday") return 5;
     else if (dayName == "Friday") return 6;
     else return 7;
+}
+int yearGoneDays(int d, int m, int y) {
+    int yearGoneDays = d - 1; // d is not done yet so - 1
+    while (m >= 1) {
+        yearGoneDays += numberOfDaysInMonth(m - 1, y);
+        m--;
+    }
+    return yearGoneDays;
 }
 
 // date
@@ -114,7 +122,7 @@ void printMonthCalander(int m, int y) {
 }
 void printYearCalander(int y) {
     cout << "\n______________________" << y << "________________________\n" << endl;
-    for (int i = 0; i <= 12; i++) {
+    for (int i = 1; i <= 12; i++) {
         printMonthCalander(i, y);
     }
 }
@@ -123,9 +131,10 @@ void printYearCalander(int y) {
 // test
 int main()
 {
-    //int d = getDay();
-    //int m = getMonth();
+    int d = getDay();
+    int m = getMonth();
     int y = getYear();
     //printMonthCalander(m, y);
     printYearCalander(y);
+    cout << "numbers of gons days of " << y << " is " << yearGoneDays(d, m, y) << endl;
 }
