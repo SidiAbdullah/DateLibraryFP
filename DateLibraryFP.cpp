@@ -112,15 +112,20 @@ void printMonthCalander(int m, int y) {
     }
     cout << "\n\n_____________________________________________________\n\n" << endl;
 }
-
-
+void printYearCalander(int y) {
+    cout << "\n______________________" << y << "________________________\n" << endl;
+    for (int i = 0; i <= 12; i++) {
+        printMonthCalander(i, y);
+    }
+}
 
 
 // test
 int main()
 {
     //int d = getDay();
-    int m = getMonth();
+    //int m = getMonth();
     int y = getYear();
-    printMonthCalander(m, y);
+    //printMonthCalander(m, y);
+    printYearCalander(y);
 }
