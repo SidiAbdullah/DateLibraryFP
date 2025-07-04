@@ -108,6 +108,24 @@ void getDate(int goneDays, int y) {
     int d = goneDays;
     printDate(d, m, y);
 }
+void getDateAfterAdding(int d, int m, int y, int daysToAdd) {
+    d += daysToAdd;
+
+    while (true) {
+        int daysInMonth = numberOfDaysInMonth(m, y);
+        if (d <= daysInMonth)
+            break;
+
+        d -= daysInMonth;
+        m++;
+
+        if (m > 12) {
+            m = 1;
+            y++;
+        }
+    }
+    printDate(d, m, y);
+}
 
 // calender
 void printMonthCalander(int m, int y) {
@@ -144,8 +162,9 @@ int main()
     int m = getMonth();
     int y = getYear();
     printDate(d, m, y);
-    cout << "Gone days are : " << yearGoneDays(d, m, y) << endl;
+    //cout << "Gone days are : " << yearGoneDays(d, m, y) << endl;
     //cout << "Remaining days are : " << yearRemainingDays(d, m, y) << endl;
     //cout << "\nDate by gone days is : " << endl;
-    getDate(yearGoneDays(d, m, y) + 1, y);
+    /*getDate(yearGoneDays(d, m, y) + 1, y);*/
+    getDateAfterAdding(d, m, y, 30);
 }
