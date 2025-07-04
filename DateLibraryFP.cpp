@@ -129,31 +129,26 @@ void getDateAfterAdding(int d, int m, int y, int daysToAdd) {
 void compareDates(int d, int m, int y, int d2, int m2, int y2) {
     if (y2 > y) {
         cout << "date 2 is bigger" << endl;
-        return;
     }
-    else {
+    else if (y2 < y) {
         cout << "date 1 is bigger" << endl;
-        return;
     }
-
-    if (y2 == y) {
+    else { // years equal
         if (m2 > m) {
             cout << "date 2 is bigger" << endl;
-            return;
         }
-        else {
+        else if (m2 < m) {
             cout << "date 1 is bigger" << endl;
-            return;
         }
-
-        if (m2 == m) {
+        else { // months equal
             if (d2 > d) {
                 cout << "date 2 is bigger" << endl;
-                return;
+            }
+            else if (d2 < d) {
+                cout << "date 1 is bigger" << endl;
             }
             else {
-                cout << "date 1 is bigger" << endl;
-                return;
+                cout << "dates are equal" << endl;
             }
         }
     }
