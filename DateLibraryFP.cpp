@@ -100,8 +100,12 @@ void printDate(int d, int m, int y, string sep = "/") {
     cout << "Date is : " << to_string(d) + sep + to_string(m) + sep + to_string(y) << endl;
 }
 void getDate(int goneDays, int y) {
-    int d = goneDays % 10 + 1;
-    int m = goneDays / 30 + 1;
+    int m = 1;
+    while (goneDays >= numberOfDaysInMonth(m, y)) {
+        goneDays -= numberOfDaysInMonth(m, y);
+        m++;
+    }
+    int d = goneDays;
     printDate(d, m, y);
 }
 
@@ -143,5 +147,5 @@ int main()
     cout << "Gone days are : " << yearGoneDays(d, m, y) << endl;
     //cout << "Remaining days are : " << yearRemainingDays(d, m, y) << endl;
     //cout << "\nDate by gone days is : " << endl;
-    getDate(yearGoneDays(d, m, y), y);
+    getDate(yearGoneDays(d, m, y) + 1, y);
 }
