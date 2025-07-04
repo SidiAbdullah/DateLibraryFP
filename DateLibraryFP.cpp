@@ -126,6 +126,38 @@ void getDateAfterAdding(int d, int m, int y, int daysToAdd) {
     }
     printDate(d, m, y);
 }
+void compareDates(int d, int m, int y, int d2, int m2, int y2) {
+    if (y2 > y) {
+        cout << "date 2 is bigger" << endl;
+        return;
+    }
+    else {
+        cout << "date 1 is bigger" << endl;
+        return;
+    }
+
+    if (y2 == y) {
+        if (m2 > m) {
+            cout << "date 2 is bigger" << endl;
+            return;
+        }
+        else {
+            cout << "date 1 is bigger" << endl;
+            return;
+        }
+
+        if (m2 == m) {
+            if (d2 > d) {
+                cout << "date 2 is bigger" << endl;
+                return;
+            }
+            else {
+                cout << "date 1 is bigger" << endl;
+                return;
+            }
+        }
+    }
+}
 
 // calender
 void printMonthCalander(int m, int y) {
@@ -158,13 +190,14 @@ void printYearCalander(int y) {
 // test
 int main()
 {
-    int d = getDay();
+    /*int d = getDay();
     int m = getMonth();
     int y = getYear();
-    printDate(d, m, y);
+    printDate(d, m, y);*/
     //cout << "Gone days are : " << yearGoneDays(d, m, y) << endl;
     //cout << "Remaining days are : " << yearRemainingDays(d, m, y) << endl;
     //cout << "\nDate by gone days is : " << endl;
     /*getDate(yearGoneDays(d, m, y) + 1, y);*/
-    getDateAfterAdding(d, m, y, 30);
+    //getDateAfterAdding(d, m, y, 30);
+    compareDates(1, 1, 2024, 2, 1, 2025);
 }
