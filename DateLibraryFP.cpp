@@ -85,19 +85,24 @@ short getDayOrder(int d, int m, int y) {
 }
 int yearGoneDays(int d, int m, int y) {
     int yearGoneDays = d - 1; // d is not done yet so - 1
-    while (m >= 1) {
+    while (m > 1) {
         yearGoneDays += numberOfDaysInMonth(m - 1, y);
-        m--;
+        --m;
     }
     return yearGoneDays;
 }
+int yearRemainingDays(int d, int m, int y) {
+    return numberOfDaysInYear(y) - yearGoneDays(d, m, y);
+}
 
 // date
-string getDate(string sep = "/") {
-    short day = getDay();
-    short month = getMonth();
-    short year = getYear();
-    return to_string(day) + sep + to_string(month) + sep + to_string(year);
+void printDate(int d, int m, int y, string sep = "/") {
+    cout << "Date is : " << to_string(d) + sep + to_string(m) + sep + to_string(y) << endl;
+}
+void getDate(int goneDays, int y) {
+    int d = goneDays % 10 + 1;
+    int m = goneDays / 30 + 1;
+    printDate(d, m, y);
 }
 
 // calender
@@ -134,7 +139,9 @@ int main()
     int d = getDay();
     int m = getMonth();
     int y = getYear();
-    //printMonthCalander(m, y);
-    printYearCalander(y);
-    cout << "numbers of gons days of " << y << " is " << yearGoneDays(d, m, y) << endl;
+    printDate(d, m, y);
+    cout << "Gone days are : " << yearGoneDays(d, m, y) << endl;
+    //cout << "Remaining days are : " << yearRemainingDays(d, m, y) << endl;
+    //cout << "\nDate by gone days is : " << endl;
+    getDate(yearGoneDays(d, m, y), y);
 }
