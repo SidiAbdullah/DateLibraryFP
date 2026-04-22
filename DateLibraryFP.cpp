@@ -194,5 +194,5 @@ int main()
     //cout << "\nDate by gone days is : " << endl;
     /*getDate(yearGoneDays(d, m, y) + 1, y);*/
     //getDateAfterAdding(d, m, y, 30);
-    compareDates(1, 1, 2024, 2, 1, 2025);
+    //compareDates(1, 1, 2024, 2, 1, 2025);
 }
