@@ -1,0 +1,16 @@
+.vs/
+x64/
+Debug/
+Release/
+
+*.user
+*.suo
+*.db
+*.ipch
+*.pdb
+*.ilk
+*.obj
+*.log
+*.tlog
+*.idb
+*.recipe
