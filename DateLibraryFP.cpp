@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <string>
 #include <iomanip>
+#include <ctime>
+#include <algorithm>
 using namespace std;
 
 // -------------------- struct --------------------
@@ -252,9 +254,63 @@ bool isDate1BeforeDate2(stDate date1, stDate date2) {
 }
 
 bool isDate1AfterDate2(stDate date1, stDate date2) {
-    return !isDate1BeforeDate2(date1, date2) && !isDatesEqual(date1, date2);
+    if (date1.year > date2.year) return true;
+    if (date1.year < date2.year) return false;
+
+    if (date1.month > date2.month) return true;
+    if (date1.month < date2.month) return false;
+
+    return date1.day > date2.day;
 }
 
+int differenceBetweenDates(stDate date1, stDate date2, bool isIncludingEndDay = false) {
+    if (isDate1AfterDate2(date1, date2)) {
+        swap(date1, date2);
+    }
+
+    int days = 0;
+
+    if (date1.year == date2.year) {
+        days = numberOfPassedDays(date2) - numberOfPassedDays(date1);
+    }
+    else {
+        // remaining days in first year
+        days += numberOfRemainingDays(date1);
+
+        // full years in between
+        for (int year = date1.year + 1; year < date2.year; year++) {
+            days += numberOfDaysInYear(year);
+        }
+
+        // passed days in last year
+        days += numberOfPassedDays(date2);
+    }
+
+    if (isIncludingEndDay)
+        days++;
+
+    return days;
+}
+stDate getSystemDate() {
+    time_t t = time(0);
+
+    tm now;
+    localtime_s(&now, &t);
+
+    stDate today;
+
+    today.year = now.tm_year + 1900;
+    today.month = now.tm_mon + 1;
+    today.day = now.tm_mday;
+
+    return today;
+}
+
+int differenceBetweenDateAndToday(stDate userDate, bool isIncludingEndDay = false) {
+    stDate today = getSystemDate();
+
+    return differenceBetweenDates(userDate, today, isIncludingEndDay);
+}
 // -------------------- calendar --------------------
 
 void printMonthCalendar(int month, int year) {
@@ -299,11 +355,9 @@ void printYearCalendar(int year) {
 
 int main() {
     stDate date1 = readFullDate();
+    //stDate date2 = readFullDate();
 
-    if (isValidDate(date1))
-        cout << "\nValid Date\n";
-    else
-        cout << "\nInvalid Date\n";
+    cout << "your age is : " << differenceBetweenDateAndToday(date1) << " day(s)";
 
     return 0;
 }
