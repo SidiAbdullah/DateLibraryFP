@@ -100,21 +100,6 @@ short getDay() {
     return day;
 }
 
-stDate readFullDate() {
-    stDate date;
-
-    cout << "\nEnter Day: ";
-    cin >> date.day;
-
-    cout << "Enter Month: ";
-    cin >> date.month;
-
-    cout << "Enter Year: ";
-    cin >> date.year;
-
-    return date;
-}
-
 bool isValidDate(stDate date) {
     if (date.year < 1)
         return false;
@@ -127,6 +112,30 @@ bool isValidDate(stDate date) {
 
     return true;
 }
+
+stDate readFullDate()
+{
+    stDate date;
+
+    do
+    {
+        cout << "\nEnter Day: ";
+        cin >> date.day;
+
+        cout << "Enter Month: ";
+        cin >> date.month;
+
+        cout << "Enter Year: ";
+        cin >> date.year;
+
+        if (!isValidDate(date))
+            cout << "\nInvalid Date, Enter Again:\n";
+
+    } while (!isValidDate(date));
+
+    return date;
+}
+
 
 // Zeller Formula
 int getDayIndex(stDate date) {
@@ -182,32 +191,26 @@ void printDate(stDate date, string separator = "/") {
 }
 
 stDate getDateByPassedDays(int passedDays, int year) {
+
+    if (passedDays >= numberOfDaysInYear(year))
+        passedDays = numberOfDaysInYear(year) - 1;
+
     stDate date;
     date.month = 1;
     date.year = year;
 
-    while (passedDays >= numberOfDaysInMonth(date.month, year)) {
-        passedDays -= numberOfDaysInMonth(date.month, year);
+    while (true)
+    {
+        short daysInMonth = numberOfDaysInMonth(date.month, date.year);
+
+        if (passedDays < daysInMonth)
+            break;
+
+        passedDays -= daysInMonth;
         date.month++;
     }
 
     date.day = passedDays + 1;
-    return date;
-}
-
-stDate getDateByAddingDays(stDate date, int daysToAdd) {
-    date.day += daysToAdd;
-
-    while (date.day > numberOfDaysInMonth(date.month, date.year)) {
-        date.day -= numberOfDaysInMonth(date.month, date.year);
-        date.month++;
-
-        if (date.month > 12) {
-            date.month = 1;
-            date.year++;
-        }
-    }
-
     return date;
 }
 
@@ -228,6 +231,84 @@ stDate getDateByAddingOneDay(stDate date) {
     }
 
     return date;
+}
+
+stDate getDateByAddingDays(stDate date, int daysToAdd) {
+    date.day += daysToAdd;
+
+    while (date.day > numberOfDaysInMonth(date.month, date.year)) {
+        date.day -= numberOfDaysInMonth(date.month, date.year);
+        date.month++;
+
+        if (date.month > 12) {
+            date.month = 1;
+            date.year++;
+        }
+    }
+
+    return date;
+}
+
+stDate getDateByAddingOneWeek(stDate date) {
+    return getDateByAddingDays(date, 7);
+}
+
+stDate getDateByAddingWeeks(stDate date, int weeks) {
+    return getDateByAddingDays(date, weeks * 7);
+}
+
+stDate getDateByAddingOneMonth(stDate date) {
+    date.month++;
+    if (date.month > 12) {
+        date.month = 1;
+        date.year++;
+    }
+
+    short daysInNewMonth = numberOfDaysInMonth(date.month, date.year);
+
+    if (date.day > daysInNewMonth) {
+        date.day = daysInNewMonth;
+    }
+
+    return date;
+}
+
+stDate getDateByAddingMonths(stDate date, int months) {
+    for (int i = 0; i < months; i++) {
+        date = getDateByAddingOneMonth(date);
+    }
+
+    return date;
+}
+
+stDate getDateByAddingYears(stDate date, int years) {
+    date.year += years;
+
+    if (date.month == 2 && date.day == 29 && !isLeapYear(date.year)) {
+        date.day = 28;
+    }
+
+    return date;
+}
+
+stDate getDateByAddingOneYear(stDate date) {
+    return getDateByAddingYears(date, 1);
+}
+
+stDate getDateByAddingOneDecade(stDate date) {
+    return getDateByAddingYears(date, 10);
+}
+
+stDate getDateByAddingDecades(stDate date, int decades) {
+    return getDateByAddingYears(date, decades * 10);
+}
+
+stDate getDateByAddingOneCentury(stDate date) {
+    return getDateByAddingYears(date, 100);
+}
+
+stDate getDateByAddingMillennium(stDate date) {
+    return getDateByAddingYears(date, 1000);
 }
 
 bool isDatesEqual(stDate date1, stDate date2) {
@@ -311,6 +392,8 @@ int differenceBetweenDateAndToday(stDate userDate, bool isIncludingEndDay = fals
 
     return differenceBetweenDates(userDate, today, isIncludingEndDay);
 }
+
+
 // -------------------- calendar --------------------
 
 void printMonthCalendar(int month, int year) {
@@ -357,7 +440,7 @@ int main() {
     stDate date1 = readFullDate();
     //stDate date2 = readFullDate();
 
-    cout << "your age is : " << differenceBetweenDateAndToday(date1) << " day(s)";
+    cout << "your age in days is : " << differenceBetweenDateAndToday(date1) << " day(s)";
 
     return 0;
 }

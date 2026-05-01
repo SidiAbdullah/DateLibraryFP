@@ -1,22 +1,31 @@
 # DateLibraryFP 📅
 
-A C++ Date Utility Library that provides a collection of functions to work with dates, years, months, days, date calculations, and calendar generation.
+A C++ Date Utility Library built from scratch to handle date calculations, validation, comparisons, and calendar generation without relying on built-in date libraries.
 
 ---
 
 ## 📌 Project Overview
 
-DateLibraryFP is a lightweight date-handling library built in C++ from scratch to deeply understand how date systems work internally.
+DateLibraryFP is a lightweight C++ project designed to deeply understand how date systems work internally by implementing the logic manually instead of depending on ready-made libraries.
 
-The main goal of this project is not just using built-in date libraries, but implementing the core logic manually, including leap year calculations, day counting, date comparison, calendar printing, date validation, and date difference calculations.
+The project focuses on building the full logic behind:
 
-This project helped strengthen problem-solving skills, algorithmic thinking, and clean code structure using Functional Programming principles.
+- leap year detection
+- date validation
+- day calculations
+- date comparison
+- calendar generation
+- date arithmetic
+- system date handling
+
+This project was built to strengthen problem-solving skills, improve algorithmic thinking, and practice writing clean, reusable, and modular code using Functional Programming principles.
 
 ---
 
 ## ⚙️ Features
 
 ### Year Functions
+
 - Check if a year is a leap year
 - Calculate number of days in a year
 - Calculate number of hours in a year
@@ -24,51 +33,60 @@ This project helped strengthen problem-solving skills, algorithmic thinking, and
 - Calculate number of seconds in a year
 
 ### Month Functions
+
 - Get number of days in a specific month
 - Get month name
-- Check if the month is the last month in the year
+- Check if a month is the last month in the year
 - Calculate month hours, minutes, and seconds
 
 ### Day & Date Functions
+
 - Validate full dates
+- Read and verify user date input safely
 - Get day of the week for any date using Zeller’s Formula
 - Get day order in the week
 - Calculate passed days in a year
 - Calculate remaining days in a year
-- Check if date is the last day in the month
+- Check if a date is the last day in the month
 
 ### Date Operations
+
 - Add one day to a date
 - Add multiple days to a date
-- Get date from passed days in a year
+- Add weeks, months, years, decades, centuries, and millennium
+- Get a date from passed days in a year
 - Compare two dates
 - Check if two dates are equal
 - Check if one date is before another
 - Check if one date is after another
 - Calculate difference between two dates
-- Calculate difference between a given date and today (Age in days)
+- Calculate difference between a given date and today (age in days)
 
 ### Calendar Functions
+
 - Print monthly calendar
 - Print full yearly calendar
 
 ### System Date
-- Get current system date directly from the device using system time
+
+- Get the current system date directly from the device using system time
 
 ---
 
 ## 🧠 Concepts Used
 
 - Functional Programming design
-- Date algorithms (Zeller’s Congruence)
+- Date algorithms
+- Zeller’s Congruence
 - Leap year calculation logic
 - Modular arithmetic
-- Arrays for optimization
 - Date normalization
+- Validation systems
+- Arrays for optimization
 - Performance optimization
-- Clean code organization
-- Problem-solving through manual implementation
-- Working with system time using `<ctime>`
+- Clean code structure
+- Reusable function design
+- System time handling using `<ctime>`
 
 ---
 
@@ -84,18 +102,19 @@ This project helped strengthen problem-solving skills, algorithmic thinking, and
 
 ## 🔮 Future Improvements (In sha Allah)
 
-There are still many features planned to be added in the future, including:
+Planned future upgrades include:
 
-- Full OOP version using a Date Class
-- Operator overloading for dates (+, -, <, >)
-- Add / subtract months and years
+- Full OOP version using a `Date` class
+- Operator overloading for dates (`+`, `-`, `<`, `>`, `==`)
+- Full date subtraction support
 - Difference between dates in months and years
 - Advanced calendar utilities
 - Time handling support (hours, minutes, seconds)
 - Better input validation system
-- Cleaner architecture separation (Date / Calendar / Utilities)
+- Cleaner architecture separation (`Date / Calendar / Utilities`)
 - Performance optimization using absolute day systems
 - Unit testing for all core functions
+- Cross-platform support for system date functions
 
 ---
 
@@ -107,6 +126,6 @@ Developed by Sidi Abdullah
 
 ## ⭐ Goal
 
-This project is part of my journey to deeply understand how date systems work internally, improve problem-solving skills, and build strong software engineering fundamentals by implementing real logic instead of depending only on built-in libraries.
+This project is part of my journey to deeply understand how date systems work internally, improve problem-solving skills, and build strong software engineering fundamentals by implementing real logic manually instead of relying only on built-in libraries.
 
 The goal is to think like a software engineer, not just a code writer.
